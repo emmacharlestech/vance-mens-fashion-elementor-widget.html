@@ -8,6 +8,8 @@ DEST="$(cd "$(dirname "$0")/.." && pwd)"
 
 rm -rf "$DEST/images" "$DEST/videos"
 cp "$SRC/$PAGE" "$DEST/index.html"
+# Vercel can't run the PHP admin, so switch the admin connection off in the deployed copy.
+sed -i "s#adminApi: '/topnotch/api/',#adminApi: '',#" "$DEST/index.html"
 
 # Every images/… and videos/… path the page mentions, plus the sharper @2x copies
 # the Venue album viewer builds in its script.
