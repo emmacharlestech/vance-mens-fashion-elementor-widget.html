@@ -2209,6 +2209,38 @@
     }
     .product-card.is-sold-out .product-image-wrap img { filter: grayscale(0.6); opacity: 0.75; }
 
+    /* Product details: price, specs and size choice */
+    .product-detail-price { font-size: 1.35rem; font-weight: 700; color: var(--gold-dark, #856829); margin-block: 0.4rem 0.8rem; }
+    .product-detail-specs { margin: 1.2rem 0 0; display: grid; gap: 0; border-top: 1px solid var(--border-light, #E5E1D8); }
+    .product-detail-specs > div { display: grid; grid-template-columns: 90px 1fr; gap: 1rem; padding: 0.6rem 0; border-bottom: 1px solid var(--border-light, #E5E1D8); font-size: 0.9rem; }
+    .product-detail-specs dt { color: rgba(32, 32, 32, 0.6); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; align-self: center; }
+    .product-detail-specs dd { margin: 0; color: var(--text-dark, #202020); }
+    .product-detail-specs .product-swatches { margin: 0; }
+    .size-picker { margin-top: 1.4rem; }
+    .size-picker-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.6rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--primary-dark, #0B1F33); }
+    .size-picker-head a { font-weight: 500; letter-spacing: 0.04em; text-transform: none; font-size: 0.82rem; color: var(--gold-dark, #856829); text-decoration: underline; text-underline-offset: 3px; }
+    .size-picker-options { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .size-option { min-width: 3.2rem; min-height: 44px; padding: 0 0.9rem; border: 1px solid rgba(32, 32, 32, 0.25); border-radius: 2px; background: #FFFFFF; color: var(--text-dark, #202020); font-family: var(--font-sans); font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: border-color 0.2s, background-color 0.2s, color 0.2s; }
+    .size-option:hover { border-color: var(--primary-dark, #0B1F33); }
+    .size-option[aria-checked="true"] { background: var(--primary-dark, #0B1F33); border-color: var(--primary-dark, #0B1F33); color: #FFFFFF; }
+    .size-option:focus-visible { outline: 2px solid var(--gold, #C9A45C); outline-offset: 2px; }
+    .size-picker-error { min-height: 1.2em; margin: 0.5rem 0 0; color: #A8322D; font-size: 0.85rem; font-weight: 500; }
+    .size-picker-error:empty { min-height: 0; margin: 0; }
+    .product-detail-actions { margin-top: 1.5rem; }
+
+    /* Bag items: size, price, quantity and remove */
+    .cart-item-body { flex: 1; min-width: 0; display: grid; gap: 0.25rem; align-content: start; }
+    .cart-item-body h4 { margin: 0; font-size: 0.95rem; line-height: 1.35; }
+    .cart-item-meta { font-size: 0.8rem; color: rgba(32, 32, 32, 0.65); }
+    .cart-item-price { font-weight: 700; color: var(--primary-dark, #0B1F33); }
+    .cart-item-controls { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; margin-top: 0.35rem; }
+    .qty-stepper { display: inline-flex; align-items: center; border: 1px solid rgba(32, 32, 32, 0.2); border-radius: 2px; }
+    .qty-stepper button { width: 36px; height: 36px; border: 0; background: none; font-size: 1.1rem; color: var(--primary-dark, #0B1F33); cursor: pointer; }
+    .qty-stepper button:disabled { opacity: 0.3; cursor: default; }
+    .qty-stepper span { min-width: 2rem; text-align: center; font-weight: 600; font-size: 0.9rem; }
+    .cart-item-remove { border: 0; background: none; padding: 0.5rem 0; font-family: var(--font-sans); font-size: 0.8rem; color: rgba(32, 32, 32, 0.65); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+    .cart-item-remove:hover { color: #A8322D; }
+
     /* Contact page */
     .contact-hero {
       background:
@@ -3479,7 +3511,7 @@
       <div class="cart-summary-row"><span>Items subtotal:</span><strong id="cart-subtotal">₦0</strong></div>
       <div class="cart-summary-row"><span>Delivery:</span><span class="cart-delivery-note">Confirmed on WhatsApp</span></div>
       <p class="cart-footnote">We deliver to all 36 states and the FCT. Your delivery fee depends on your location; we'll confirm it with your order.</p>
-      <button class="btn btn-gold btn-full" id="cart-checkout-btn" onclick="openCheckoutModal()" style="margin-top:1rem">Proceed To Checkout</button>
+      <button class="btn btn-gold btn-full" id="cart-checkout-btn" onclick="openCheckoutModal()" style="margin-top:1rem">Proceed to Checkout</button>
     </div>
   </div>
 
@@ -5144,12 +5176,27 @@
           this.cart.push({ id: product.id, name: product.name, price: product.price, image: product.image, selectedSize: chosenSize, qty: 1 });
         }
         this.save();
-        showToast(`Added "${product.name}" to cart.`);
+        showToast(`${product.name}${chosenSize && !/^one size$/i.test(chosenSize) ? ' (size ' + chosenSize + ')' : ''} added to your bag.`);
         // The header has no bag icon, so open the bag straight away: it holds the checkout button.
         openCartDrawer();
       }
 
-      formatMoney(amt) { return amt == null ? "Price on request" : "₦" + amt.toLocaleString('en-NG'); }
+      formatMoney(amt) { return amt == null ? "Price on Request" : "₦" + amt.toLocaleString('en-NG'); }
+
+      changeQty(index, delta) {
+        const item = this.cart[index];
+        if (!item) return;
+        item.qty = Math.max(1, Math.min(20, item.qty + delta));
+        this.save();
+        renderCartDrawer();
+      }
+
+      removeFromCart(index) {
+        const [item] = this.cart.splice(index, 1);
+        this.save();
+        renderCartDrawer();
+        if (item) showToast(`${item.name} removed from your bag.`);
+      }
 
       toggleWishlist(id) {
         const idx = this.wishlist.indexOf(id);
@@ -5556,10 +5603,10 @@
             ${swatches ? `<div class="product-swatches">${swatches}</div>` : ''}
             ${sizesText ? `<div class="product-sizes-list">Sizes: ${sizesText}</div>` : ''}
             ${p.soldOut
-              ? `<a class="btn btn-dark btn-sm btn-full" href="${askPriceLink(p)}" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Sold Out: Ask When It's Back</a>`
+              ? `<a class="btn btn-dark btn-sm btn-full" href="${askPriceLink(p)}" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Enquire About Availability</a>`
               : p.price == null
-              ? `<a class="btn btn-dark btn-sm btn-full" href="${askPriceLink(p)}" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Ask for Price</a>`
-              : `<button class="btn btn-dark btn-sm btn-full" onclick="Store.addToCart(Store.products.find(item=>item.id==='${p.id}'))">Add To Cart</button>`}
+              ? `<a class="btn btn-dark btn-sm btn-full" href="${askPriceLink(p)}" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Enquire on WhatsApp</a>`
+              : `<button class="btn btn-dark btn-sm btn-full" onclick="addToBagFromCard('${p.id}')">Add to Bag</button>`}
           </div>
         </div>
       `;
@@ -5739,28 +5786,78 @@
       nextBtn.disabled = testimonialsPage >= totalPages - 1;
     }
 
+    // A product needs a size choice when it comes in more than one size.
+    function needsSize(p) { return (p.sizes || []).filter(s => !/^one size$/i.test(s)).length > 1; }
+
+    let modalSize = null;
+
     function openProductModal(id) {
       const p = Store.products.find(item => item.id === id);
       if (!p) return;
+      modalSize = needsSize(p) ? null : (p.sizes || [])[0] || null;
+      const canBuy = !p.soldOut && p.price != null;
+      const specs = [
+        p.fabric ? ['Fabric', p.fabric] : p.material ? ['Material', p.material] : null,
+        p.fitType ? ['Fit', p.fitType] : null,
+        p.subcategory ? ['Style', p.subcategory] : null,
+      ].filter(Boolean);
+      const swatches = (p.colors || []).map(c => `<span class="swatch-dot" style="background:${c}"></span>`).join('');
       document.getElementById('product-modal-body').innerHTML = `
         <div class="product-detail-grid">
           <div class="product-detail-gallery"><img src="${p.image}" class="product-main-img" alt="${p.name}"></div>
           <div class="product-detail-info">
             <span class="section-label">${p.category}</span>
             <h2>${p.name}</h2>
-            <div style="font-size:1.3rem; font-weight:700; color:var(--gold-dark); margin-block:0.5rem">${Store.formatMoney(p.price)}</div>
+            <div class="product-detail-price">${Store.formatMoney(p.price)}</div>
             <p>${p.description}</p>
-            <div style="margin-top:1.5rem">
+            ${specs.length || swatches ? `<dl class="product-detail-specs">
+              ${specs.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}
+              ${swatches ? `<div><dt>Colour</dt><dd class="product-swatches">${swatches}</dd></div>` : ''}
+            </dl>` : ''}
+            ${canBuy && needsSize(p) ? `
+            <div class="size-picker">
+              <div class="size-picker-head"><span id="size-picker-label">Choose your size</span>
+                <a href="#" onclick="closeModal('product-detail-modal'); openSizeGuideModal(); return false;">Size guide</a></div>
+              <div class="size-picker-options" role="radiogroup" aria-labelledby="size-picker-label">
+                ${p.sizes.map(s => `<button type="button" class="size-option" role="radio" aria-checked="false" onclick="chooseModalSize(this)">${s}</button>`).join('')}
+              </div>
+              <p class="size-picker-error" id="size-picker-error" role="alert"></p>
+            </div>` : ''}
+            <div class="product-detail-actions">
               ${p.soldOut
-                ? `<a class="btn btn-gold btn-full" href="${askPriceLink(p)}" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Sold Out: Ask When It's Back</a>`
+                ? `<a class="btn btn-gold btn-full" href="${askPriceLink(p)}" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Enquire About Availability</a>`
                 : p.price == null
-                ? `<a class="btn btn-gold btn-full" href="${askPriceLink(p)}" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Ask for Price on WhatsApp</a>`
-                : `<button class="btn btn-gold btn-full" onclick="Store.addToCart(Store.products.find(item=>item.id==='${p.id}')); closeModal('product-detail-modal');">Add To Bag</button>`}
+                ? `<a class="btn btn-gold btn-full" href="${askPriceLink(p)}" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Enquire on WhatsApp</a>`
+                : `<button class="btn btn-gold btn-full" onclick="addToBagFromModal('${p.id}')">Add to Bag</button>`}
             </div>
           </div>
         </div>
       `;
       document.getElementById('product-detail-modal').classList.add('active');
+    }
+
+    function chooseModalSize(btn) {
+      modalSize = btn.textContent;
+      btn.parentNode.querySelectorAll('.size-option').forEach(b => b.setAttribute('aria-checked', String(b === btn)));
+      document.getElementById('size-picker-error').textContent = '';
+    }
+
+    function addToBagFromModal(id) {
+      const p = Store.products.find(item => item.id === id);
+      if (needsSize(p) && !modalSize) {
+        document.getElementById('size-picker-error').textContent = 'Please choose your size.';
+        document.querySelector('.size-option').focus();
+        return;
+      }
+      closeModal('product-detail-modal');
+      Store.addToCart(p, modalSize);
+    }
+
+    // Card button: products with several sizes open the details so the customer picks one.
+    function addToBagFromCard(id) {
+      const p = Store.products.find(item => item.id === id);
+      if (needsSize(p)) openProductModal(id);
+      else Store.addToCart(p);
     }
 
     function closeModal(id) { document.getElementById(id).classList.remove('active'); }
@@ -6125,9 +6222,21 @@
       if (Store.cart.length === 0) {
         container.innerHTML = '<p class="text-center" style="padding:2rem">Your shopping bag is empty.</p>';
       } else {
-        container.innerHTML = Store.cart.map(item => {
+        container.innerHTML = Store.cart.map((item, i) => {
           subtotal += item.price * item.qty;
-          return `<div class="cart-item"><img src="${item.image}" class="cart-item-img" alt="${item.name}"><div><h4>${item.name}</h4><div>Size: ${item.selectedSize || '-'}</div><div>Qty: ${item.qty}</div><div>${Store.formatMoney(item.price * item.qty)}</div></div></div>`;
+          const size = item.selectedSize && !/^one size$/i.test(item.selectedSize) ? `<div class="cart-item-meta">Size ${item.selectedSize}</div>` : '';
+          return `<div class="cart-item"><img src="${item.image}" class="cart-item-img" alt="${item.name}">
+            <div class="cart-item-body"><h4>${item.name}</h4>${size}
+              <div class="cart-item-price">${Store.formatMoney(item.price * item.qty)}</div>
+              <div class="cart-item-controls">
+                <div class="qty-stepper" role="group" aria-label="Quantity of ${item.name}">
+                  <button type="button" onclick="Store.changeQty(${i}, -1)" aria-label="One less" ${item.qty <= 1 ? 'disabled' : ''}>&minus;</button>
+                  <span aria-live="polite">${item.qty}</span>
+                  <button type="button" onclick="Store.changeQty(${i}, 1)" aria-label="One more">+</button>
+                </div>
+                <button type="button" class="cart-item-remove" onclick="Store.removeFromCart(${i})">Remove</button>
+              </div>
+            </div></div>`;
         }).join('');
       }
       document.getElementById('cart-subtotal').textContent = Store.formatMoney(subtotal);
