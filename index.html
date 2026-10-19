@@ -3241,7 +3241,7 @@
           <h3>Where it is kept</h3>
           <ul>
             <li>Your orders and messages are kept in our WhatsApp and business records. This website itself does not store your details on a server.</li>
-            <li>Your shopping bag, wishlist and order references are saved only in your own browser, so they are still there when you come back. You can clear them by clearing your browser's site data.</li>
+            <li>Your shopping bag and order references are saved only in your own browser, so they are still there when you come back. You can clear them by clearing your browser's site data.</li>
             <li>The website loads fonts and icons from Google Fonts and Cloudflare, which receive your device's internet address when the page loads.</li>
           </ul>
 
@@ -5536,7 +5536,6 @@
     });
 
     function productCardTemplate(p) {
-      const isWishlisted = Store.wishlist.includes(p.id);
       const swatches = (p.colors || []).map(c => `<span class="swatch-dot" style="background:${c}" title="${c}"></span>`).join('');
       const sizesText = (p.sizes || []).join(', ');
       const hasDiscount = p.originalPrice && p.originalPrice > p.price;
@@ -5545,9 +5544,6 @@
           <div class="product-image-wrap" onclick="openProductModal('${p.id}')">
             <img src="${p.image}" alt="${p.name}">
             ${p.soldOut ? '<span class="product-sold-out-tag">Sold out</span>' : ''}
-            <button class="product-wishlist-btn${isWishlisted ? ' active' : ''}" onclick="event.stopPropagation(); Store.toggleWishlist('${p.id}');" aria-label="${isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'}" aria-pressed="${isWishlisted}">
-              <i class="fa-${isWishlisted ? 'solid' : 'regular'} fa-heart"></i>
-            </button>
             <button class="product-quick-view-btn">Quick View</button>
           </div>
           <div class="product-info">
