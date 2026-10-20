@@ -21,7 +21,8 @@
   <meta name="twitter:title" content="Top-Notch Shemen Global | Two Powerful Brands. One Standard.">
   <meta name="twitter:image" content="https://vance-mens-fashion-elementor-widget.vercel.app/images/share-preview.jpg">
   <meta name="theme-color" content="#0B1F33">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230B1F33'/%3E%3Ctext x='50' y='70' font-family='Georgia,serif' font-size='58' font-weight='700' fill='%23C9A45C' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/png" href="images/brand/favicon-64.png">
+  <link rel="apple-touch-icon" href="images/brand/apple-touch-icon.png">
 
   <!-- Google Fonts & FontAwesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -2209,6 +2210,26 @@
     }
     .product-card.is-sold-out .product-image-wrap img { filter: grayscale(0.6); opacity: 0.75; }
 
+    /* Logo: TNS emblem beside the wordmark; full logo in the footer */
+    .brand-logo { display: inline-flex; align-items: center; gap: 0.7rem; text-decoration: none; }
+    .brand-mark { height: 46px; width: auto; flex: none; }
+    .brand-logo-drawer .brand-mark { height: 38px; }
+    .footer-logo { display: block; width: 230px; max-width: 100%; height: auto; margin: -0.5rem 0 1rem -0.4rem; }
+    @media (max-width: 600px) {
+      .brand-mark { height: 34px; }
+      .brand-logo { gap: 0.5rem; }
+      .footer-logo { width: 200px; }
+    }
+
+    /* Email addresses are long: let them wrap on small screens */
+    .contact-card-email, .footer-email { overflow-wrap: anywhere; }
+    .footer-email { font-size: 0.8rem; letter-spacing: 0; }
+
+    /* Instagram: tiles and handle open the profile */
+    a.instagram-item { display: block; }
+    .instagram-handle-link { text-decoration: none; }
+    .instagram-handle-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+
     /* Product details: price, specs and size choice */
     .product-detail-price { font-size: 1.35rem; font-weight: 700; color: var(--gold-dark, #856829); margin-block: 0.4rem 0.8rem; }
     .product-detail-specs { margin: 1.2rem 0 0; display: grid; gap: 0; border-top: 1px solid var(--border-light, #E5E1D8); }
@@ -2468,7 +2489,8 @@
   <!-- STICKY NAVIGATION HEADER -->
   <header class="sticky-header">
     <div class="container header-container">
-      <a href="#top" class="brand-logo">
+      <a href="#top" class="brand-logo" aria-label="Top-Notch Shemen Global home">
+        <img src="images/brand/tns-mark.png" class="brand-mark" alt="" width="304" height="160">
         <span class="brand-logo-text">TOP-NOTCH <span>SHEMEN GLOBAL</span></span>
       </a>
 
@@ -2512,7 +2534,7 @@
   <div class="mobile-drawer-overlay" id="mobile-drawer-overlay"></div>
   <div class="mobile-nav-drawer">
     <div class="mobile-drawer-header">
-      <span class="brand-logo-text" style="font-size:1.4rem; color:#FFF">TOP-NOTCH <span>SHEMEN GLOBAL</span></span>
+      <span class="brand-logo brand-logo-drawer"><img src="images/brand/tns-mark.png" class="brand-mark" alt="" width="304" height="160"><span class="brand-logo-text" style="font-size:1.4rem; color:#FFF">TOP-NOTCH <span>SHEMEN GLOBAL</span></span></span>
       <button class="mobile-drawer-close" aria-label="Close menu" style="background:none; border:none; color:#FFF; font-size:1.5rem; cursor:pointer">&times;</button>
     </div>
     <nav class="mobile-nav-links" aria-label="Menu">
@@ -2533,7 +2555,7 @@
       <a href="#contact">Contact Us</a>
     </nav>
     <div style="margin-top:auto; padding-top:2rem; border-top:1px solid rgba(255,255,255,0.1)">
-      <a href="https://wa.me/2348164151594" target="_blank" class="btn btn-gold btn-full">
+      <a href="https://wa.me/2349078552459" target="_blank" class="btn btn-gold btn-full">
         <i class="fa-brands fa-whatsapp"></i> Chat With Us
       </a>
     </div>
@@ -2827,7 +2849,7 @@
           <li><i class="fa-solid fa-check" aria-hidden="true"></i>Corporate and occasion styling, head to toe</li>
           <li><i class="fa-solid fa-check" aria-hidden="true"></i>Help with sizing and fit before you buy</li>
         </ul>
-        <a href="https://wa.me/2348164151594?text=Hello%20Top-Notch%20Shemen%20Global%2C%20I%20would%20like%20to%20speak%20with%20a%20Personal%20Style%20Consultant." target="_blank" class="btn btn-gold btn-lg">
+        <a href="https://wa.me/2349078552459?text=Hello%20Top-Notch%20Shemen%20Global%2C%20I%20would%20like%20to%20speak%20with%20a%20Personal%20Style%20Consultant." target="_blank" class="btn btn-gold btn-lg">
           <i class="fa-brands fa-whatsapp"></i> Speak With a Style Consultant
         </a>
       </div>
@@ -3140,17 +3162,17 @@
   <section data-page="home" class="section-padding">
     <div class="container">
       <div class="text-center">
-        <span class="section-label" data-tn="instagram-handle">@TOPNOTCHSHEMENGLOBAL</span>
+        <a class="section-label instagram-handle-link" data-tn="instagram-handle" href="https://www.instagram.com/topnotch_wardrobes?dlrf=NTdhYnpuaXZwbHBo" target="_blank" rel="noopener">@TOPNOTCH_WARDROBES</a>
         <h2 class="section-title">Follow the Style</h2>
         <p class="section-subtitle">Discover our latest looks, arrivals, and style inspiration.</p>
       </div>
       <div class="instagram-grid">
-        <div class="instagram-item"><img src="images/vance/suit-22.jpg" alt="Bronze Crystal Cascade Tuxedo by Top-Notch Wardrobes" loading="lazy"><div class="instagram-overlay"><i class="fa-brands fa-instagram"></i></div></div>
-        <div class="instagram-item"><img src="images/vance/suit-27.jpg" alt="Lilac and Chocolate Contour Suit by Top-Notch Wardrobes" loading="lazy"><div class="instagram-overlay"><i class="fa-brands fa-instagram"></i></div></div>
-        <div class="instagram-item"><img src="images/vance/tie-set-04.jpg" alt="Royal Blue Stripe Tie Set with cufflinks in a gift box" loading="lazy"><div class="instagram-overlay"><i class="fa-brands fa-instagram"></i></div></div>
-        <div class="instagram-item"><img src="images/wardrobes/shoes/shoe-40.jpg" alt="Black leather penny loafers from Top-Notch Wardrobes" loading="lazy"><div class="instagram-overlay"><i class="fa-brands fa-instagram"></i></div></div>
-        <div class="instagram-item"><img src="images/venue/church-altar/altar-05.jpg" alt="Navy, gold and magenta diamond stage by Top-Notch Venue Concept" loading="lazy"><div class="instagram-overlay"><i class="fa-brands fa-instagram"></i></div></div>
-        <div class="instagram-item"><img src="images/venue/event-decoration/event-02.jpg" alt="Glass marquee reception with a floral walkway by Top-Notch Venue Concept" loading="lazy"><div class="instagram-overlay"><i class="fa-brands fa-instagram"></i></div></div>
+        <a class="instagram-item" href="https://www.instagram.com/topnotch_wardrobes?dlrf=NTdhYnpuaXZwbHBo" target="_blank" rel="noopener"><img src="images/vance/suit-22.jpg" alt="Bronze Crystal Cascade Tuxedo by Top-Notch Wardrobes" loading="lazy"><div class="instagram-overlay"><i class="fa-brands fa-instagram"></i></div></a>
+        <a class="instagram-item" href="https://www.instagram.com/topnotch_wardrobes?dlrf=NTdhYnpuaXZwbHBo" target="_blank" rel="noopener"><img src="images/vance/suit-27.jpg" alt="Lilac and Chocolate Contour Suit by Top-Notch Wardrobes" loading="lazy"><div class="instagram-overlay"><i class="fa-brands fa-instagram"></i></div></a>
+        <a class="instagram-item" href="https://www.instagram.com/topnotch_wardrobes?dlrf=NTdhYnpuaXZwbHBo" target="_blank" rel="noopener"><img src="images/vance/tie-set-04.jpg" alt="Royal Blue Stripe Tie Set with cufflinks in a gift box" loading="lazy"><div class="instagram-overlay"><i class="fa-brands fa-instagram"></i></div></a>
+        <a class="instagram-item" href="https://www.instagram.com/topnotch_wardrobes?dlrf=NTdhYnpuaXZwbHBo" target="_blank" rel="noopener"><img src="images/wardrobes/shoes/shoe-40.jpg" alt="Black leather penny loafers from Top-Notch Wardrobes" loading="lazy"><div class="instagram-overlay"><i class="fa-brands fa-instagram"></i></div></a>
+        <a class="instagram-item" href="https://www.instagram.com/topnotch_wardrobes?dlrf=NTdhYnpuaXZwbHBo" target="_blank" rel="noopener"><img src="images/venue/church-altar/altar-05.jpg" alt="Navy, gold and magenta diamond stage by Top-Notch Venue Concept" loading="lazy"><div class="instagram-overlay"><i class="fa-brands fa-instagram"></i></div></a>
+        <a class="instagram-item" href="https://www.instagram.com/topnotch_wardrobes?dlrf=NTdhYnpuaXZwbHBo" target="_blank" rel="noopener"><img src="images/venue/event-decoration/event-02.jpg" alt="Glass marquee reception with a floral walkway by Top-Notch Venue Concept" loading="lazy"><div class="instagram-overlay"><i class="fa-brands fa-instagram"></i></div></a>
       </div>
     </div>
   </section>
@@ -3166,7 +3188,7 @@
         <p style="color: var(--taupe); max-width: 550px; margin-inline: auto">
           Get new arrivals, offers and event inspiration from both our brands, straight to your WhatsApp.
         </p>
-        <a class="btn btn-gold btn-lg newsletter-wa-btn" href="https://wa.me/2348164151594?text=Hello%20Top-Notch%20Shemen%20Global%2C%20please%20add%20me%20to%20your%20WhatsApp%20updates%20list%20for%20new%20arrivals%2C%20offers%20and%20event%20inspiration." target="_blank" rel="noopener">
+        <a class="btn btn-gold btn-lg newsletter-wa-btn" href="https://wa.me/2349078552459?text=Hello%20Top-Notch%20Shemen%20Global%2C%20please%20add%20me%20to%20your%20WhatsApp%20updates%20list%20for%20new%20arrivals%2C%20offers%20and%20event%20inspiration." target="_blank" rel="noopener">
           <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Join Our WhatsApp Updates
         </a>
         <p class="newsletter-note">Opens WhatsApp with a short message to send us. Reply STOP any time to be removed.</p>
@@ -3281,12 +3303,12 @@
           <p>We keep order and booking records for as long as needed to serve you and to meet our tax and accounting obligations, and then delete them.</p>
 
           <h3>Your rights</h3>
-          <p>You can ask us to show you the information we hold about you, correct it, delete it, or stop sending you updates. Message us on WhatsApp or call <a href="tel:+2348164151594">+234 816 415 1594</a>. If you are not satisfied with our response, you can complain to the Nigeria Data Protection Commission (NDPC).</p>
+          <p>You can ask us to show you the information we hold about you, correct it, delete it, or stop sending you updates. Message us on WhatsApp at <a href="https://wa.me/2349078552459" target="_blank" rel="noopener">+234 907 855 2459</a> or email <a href="mailto:topnotchshemenglobalventures@gmail.com">topnotchshemenglobalventures@gmail.com</a>. If you are not satisfied with our response, you can complain to the Nigeria Data Protection Commission (NDPC).</p>
         </article>
 
         <div class="policies-help">
           <p>Questions about an order, a booking or your information?</p>
-          <a href="https://wa.me/2348164151594?text=Hello%20Top-Notch%20Shemen%20Global%2C%20I%20have%20a%20question%20about%20your%20policies." target="_blank" rel="noopener" class="btn btn-dark"><i class="fa-brands fa-whatsapp"></i> Ask Us on WhatsApp</a>
+          <a href="https://wa.me/2349078552459?text=Hello%20Top-Notch%20Shemen%20Global%2C%20I%20have%20a%20question%20about%20your%20policies." target="_blank" rel="noopener" class="btn btn-dark"><i class="fa-brands fa-whatsapp"></i> Ask Us on WhatsApp</a>
         </div>
       </div>
     </div>
@@ -3304,19 +3326,20 @@
     <div class="section-padding">
       <div class="container contact-layout">
         <div class="contact-cards">
-          <a class="contact-card" href="https://wa.me/2348164151594?text=Hello%20Top-Notch%20Shemen%20Global" target="_blank" rel="noopener">
+          <a class="contact-card" href="https://wa.me/2349078552459?text=Hello%20Top-Notch%20Shemen%20Global" target="_blank" rel="noopener">
             <span class="contact-card-icon contact-card-icon-wa"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></span>
-            <span class="contact-card-body"><strong>Chat on WhatsApp</strong><span>+234 816 415 1594</span><small>The fastest way to reach us</small></span>
+            <span class="contact-card-body"><strong>Chat on WhatsApp</strong><span>+234 907 855 2459</span><small>The fastest way to reach us</small></span>
           </a>
-          <a class="contact-card" href="tel:+2348164151594">
-            <span class="contact-card-icon"><i class="fa-solid fa-phone" aria-hidden="true"></i></span>
-            <span class="contact-card-body"><strong>Call Us</strong><span>+234 816 415 1594</span><small>Speak to a member of our team</small></span>
-          </a>
-          <!-- Email and address cards appear once they are filled in under the admin's Settings -->
-          <a class="contact-card" data-tn="email" href="#" hidden>
+          <a class="contact-card" data-tn="email" href="mailto:topnotchshemenglobalventures@gmail.com">
             <span class="contact-card-icon"><i class="fa-regular fa-envelope" aria-hidden="true"></i></span>
-            <span class="contact-card-body"><strong>Email Us</strong><span data-tn-text></span><small>For orders, quotes and partnerships</small></span>
+            <span class="contact-card-body"><strong>Email Us</strong><span data-tn-text class="contact-card-email">topnotchshemenglobalventures@gmail.com</span><small>For orders, quotes and partnerships</small></span>
           </a>
+          <a class="contact-card" href="https://www.instagram.com/topnotch_wardrobes?dlrf=NTdhYnpuaXZwbHBo" target="_blank" rel="noopener">
+            <span class="contact-card-icon"><i class="fa-brands fa-instagram" aria-hidden="true"></i></span>
+            <span class="contact-card-body"><strong>Follow on Instagram</strong><span>@topnotch_wardrobes</span><small>New arrivals and styling ideas</small></span>
+          </a>
+          <!-- The address card appears once it is filled in under the admin's Settings -->
+
           <a class="contact-card" data-tn="visit" target="_blank" rel="noopener" hidden>
             <span class="contact-card-icon"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></span>
             <span class="contact-card-body"><strong>Visit Us</strong><span data-tn-text="address"></span><small data-tn-text="hours"></small></span>
@@ -3384,12 +3407,11 @@
     <div class="container">
       <div class="footer-grid footer-grid-5">
         <div class="footer-brand">
-          <span class="brand-logo-text">TOP-NOTCH <span>SHEMEN GLOBAL</span></span>
+          <img src="images/brand/logo-full.png" class="footer-logo" alt="Top-Notch Shemen Global: Creative &amp; Business Solutions" width="900" height="573" loading="lazy">
           <p>Home of Top-Notch Wardrobes, premium corporate and lifestyle fashion for men, and Top-Notch Venue Concept, stage design and venue transformation.</p>
           <div class="footer-social">
-            <a href="https://wa.me/2348164151594" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
-            <a href="tel:+2348164151594" aria-label="Call us"><i class="fa-solid fa-phone" aria-hidden="true"></i></a>
-            <a data-tn-social="instagram" target="_blank" rel="noopener" aria-label="Instagram" hidden><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+            <a href="https://wa.me/2349078552459" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+            <a data-tn-social="instagram" href="https://www.instagram.com/topnotch_wardrobes?dlrf=NTdhYnpuaXZwbHBo" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
             <a data-tn-social="facebook" target="_blank" rel="noopener" aria-label="Facebook" hidden><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
             <a data-tn-social="tiktok" target="_blank" rel="noopener" aria-label="TikTok" hidden><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
           </div>
@@ -3427,9 +3449,8 @@
         </nav>
         <div class="footer-col">
           <h4 class="footer-heading">Get in Touch</h4>
-          <a class="footer-contact-item" href="https://wa.me/2348164151594" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i><span>WhatsApp<br><strong>+234 816 415 1594</strong></span></a>
-          <a class="footer-contact-item" href="tel:+2348164151594"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Call<br><strong>+234 816 415 1594</strong></span></a>
-          <a class="footer-contact-item" data-tn="email" href="#" hidden><i class="fa-regular fa-envelope" aria-hidden="true"></i><span>Email<br><strong data-tn-text></strong></span></a>
+          <a class="footer-contact-item" href="https://wa.me/2349078552459" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i><span>WhatsApp<br><strong>+234 907 855 2459</strong></span></a>
+          <a class="footer-contact-item" data-tn="email" href="mailto:topnotchshemenglobalventures@gmail.com"><i class="fa-regular fa-envelope" aria-hidden="true"></i><span>Email<br><strong data-tn-text class="footer-email">topnotchshemenglobalventures@gmail.com</strong></span></a>
           <a class="footer-contact-item" data-tn="visit" target="_blank" rel="noopener" hidden><i class="fa-solid fa-location-dot" aria-hidden="true"></i><span>Visit<br><strong data-tn-text="address"></strong><small data-tn-text="hours"></small></span></a>
           <a href="#contact" class="btn btn-gold btn-sm footer-message-btn">Send a Message</a>
         </div>
@@ -3445,7 +3466,7 @@
   </footer>
 
   <!-- FLOATING WHATSAPP -->
-  <a href="https://wa.me/2348164151594?text=Hello%20Top-Notch%20Shemen%20Global" target="_blank" class="whatsapp-float" aria-label="Chat with us on WhatsApp">
+  <a href="https://wa.me/2349078552459?text=Hello%20Top-Notch%20Shemen%20Global" target="_blank" class="whatsapp-float" aria-label="Chat with us on WhatsApp">
     <i class="fa-brands fa-whatsapp"></i>
   </a>
 
@@ -5678,7 +5699,7 @@
 
     // WhatsApp number for orders, quotes and messages (international format, no +).
     // The admin's Settings page overrides it when the admin is connected.
-    let SHOP_WHATSAPP = '2348164151594';
+    let SHOP_WHATSAPP = '2349078552459';
     function askPriceLink(p) {
       const text = p.soldOut
         ? 'Hello Top-Notch Wardrobes, please when will the "' + p.name + '" be back in stock? (' + p.id + ')'
@@ -6195,7 +6216,7 @@
           <p style="text-align:center; margin-bottom:1.5rem; font-size:0.95rem; color:var(--text-muted)">${item.desc}</p>
 
           <div style="display:flex; gap:1rem; flex-wrap:wrap">
-            <a href="https://wa.me/2348164151594?text=${waText}" target="_blank" class="btn btn-gold btn-full">
+            <a href="https://wa.me/2349078552459?text=${waText}" target="_blank" class="btn btn-gold btn-full">
               <i class="fa-brands fa-whatsapp"></i> ${isGroom ? 'Book Your Groom Fitting On WhatsApp' : 'Book Groomsmen Package On WhatsApp'}
             </a>
           </div>
@@ -6474,8 +6495,8 @@
     }
 
     function applyAdminSettings(s) {
-      const BUILT_IN_NUMBER = '2348164151594';
-      const BUILT_IN_LABEL = '+234 816 415 1594';
+      const BUILT_IN_NUMBER = '2349078552459';
+      const BUILT_IN_LABEL = '+234 907 855 2459';
       const setLabel = (link, label) => link.querySelectorAll('span, strong').forEach(el => {
         if (!el.children.length && el.textContent.trim() === BUILT_IN_LABEL) el.textContent = label;
       });
