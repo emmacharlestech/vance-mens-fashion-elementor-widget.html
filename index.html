@@ -604,14 +604,17 @@
       }
       .hero-slide-caption { padding-right: 0; border-right: none; }
       .hero-slide-caption-name { font-size: 1rem; }
-      .hero-content { padding-bottom: 7.5rem; }
     }
 
     .hero-content {
       position: relative;
       z-index: 2;
       max-width: 680px;
-      padding: 4rem 0;
+      /* Bottom room for the "Featured Look" suit name, so it never sits against the buttons */
+      padding: 4rem 0 9.5rem;
+    }
+    @media (max-width: 600px) {
+      .hero-content { padding: 3rem 0 11rem; }
     }
 
     .hero-subtitle {
@@ -2210,6 +2213,19 @@
     }
     .product-card.is-sold-out .product-image-wrap img { filter: grayscale(0.6); opacity: 0.75; }
 
+    /* Venue hero: rotating lines share one grid cell, so the tallest sets the height and nothing jumps */
+    .venue-hero-rotator { display: grid; }
+    .venue-hero-rotator > span {
+      grid-area: 1 / 1;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+    .venue-hero-rotator > span.is-active { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .venue-hero-rotator > span { transition: none; transform: none; }
+    }
+
     /* Logo: TNS emblem beside the wordmark; full logo in the footer */
     .brand-logo { display: inline-flex; align-items: center; gap: 0.7rem; text-decoration: none; }
     .brand-mark { height: 46px; width: auto; flex: none; }
@@ -2935,8 +2951,12 @@
       <span class="brand-kicker"><i class="fa-solid fa-crown"></i> Top-Notch Venue Concept</span>
       <div class="venue-hero-pillars"><span>Stage</span><span>Design</span><span>Branding</span><span>Transformation</span></div>
       <h2 class="venue-hero-title">We Turn Your Space Into an <span class="script-accent">Experience</span></h2>
-      <p class="venue-hero-text">
-        From church altars and stages to weddings, conferences and private celebrations, we design, brand and transform venues so every guest feels the moment.
+      <!-- Each line shows for 15 seconds, then fades into the next (see setupVenueHeroRotator in the script) -->
+      <p class="venue-hero-text venue-hero-rotator" id="venue-hero-rotator">
+        <span class="is-active">From church altars and stages to weddings, conferences and private celebrations, we design, brand and transform venues so every guest feels the moment.</span>
+        <span aria-hidden="true">Stages that lift worship, weddings that take the breath away, and launches your guests will still be talking about years later.</span>
+        <span aria-hidden="true">Lighting, LED screens, draping and branding, planned together and built as one seamless design.</span>
+        <span aria-hidden="true">Share your vision with us. We handle the design, the setup and every last detail, so you can enjoy the moment.</span>
       </p>
       <div class="venue-hero-actions">
         <a href="#venue-quote" class="btn btn-gold">Request a Quote <i class="fa-solid fa-arrow-right"></i></a>
@@ -2945,7 +2965,8 @@
     </div>
   </section>
 
-  <section data-page="venue" id="venue-services" class="section-padding bg-dark">
+  <!-- Shown on the Venue Concept page and on Home (after the two brand panels) -->
+  <section data-page="venue home" id="venue-services" class="section-padding bg-dark">
     <div class="container">
       <div class="text-center">
         <span class="section-label">What We Do</span>
@@ -3015,19 +3036,19 @@
   <section data-page="venue" id="venue-perfect-for" class="section-padding">
     <div class="container">
       <div class="text-center">
-        <span class="section-label">Perfect For</span>
-        <h2 class="section-title">Events We Bring to Life</h2>
-        <p class="section-subtitle">Whatever the occasion, we shape the space around it.</p>
+        <span class="section-label">Perfect For Every Occasion</span>
+        <h2 class="section-title">Moments We Bring <span class="script-accent">to Life</span></h2>
+        <p class="section-subtitle">Sacred services, grand weddings, bold launches and joyful birthdays. Whatever you are celebrating, we design the setting, light the stage and create an atmosphere your guests will remember long after the last song.</p>
       </div>
       <div class="perfect-for-grid">
-        <div class="perfect-for-item"><i class="fa-solid fa-church" aria-hidden="true"></i>Churches</div>
-        <div class="perfect-for-item"><i class="fa-solid fa-ring" aria-hidden="true"></i>Weddings</div>
-        <div class="perfect-for-item"><i class="fa-solid fa-people-group" aria-hidden="true"></i>Conferences</div>
-        <div class="perfect-for-item"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>Graduations</div>
-        <div class="perfect-for-item"><i class="fa-solid fa-building" aria-hidden="true"></i>Corporate Events</div>
-        <div class="perfect-for-item"><i class="fa-solid fa-cake-candles" aria-hidden="true"></i>Birthday Parties</div>
-        <div class="perfect-for-item"><i class="fa-solid fa-chalkboard-user" aria-hidden="true"></i>Seminars</div>
-        <div class="perfect-for-item"><i class="fa-solid fa-ellipsis" aria-hidden="true"></i>And More</div>
+        <div class="perfect-for-item"><i class="fa-solid fa-church" aria-hidden="true"></i>Church Services &amp; Anniversaries</div>
+        <div class="perfect-for-item"><i class="fa-solid fa-ring" aria-hidden="true"></i>Weddings &amp; Receptions</div>
+        <div class="perfect-for-item"><i class="fa-solid fa-people-group" aria-hidden="true"></i>Conferences &amp; Summits</div>
+        <div class="perfect-for-item"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>Graduations &amp; Convocations</div>
+        <div class="perfect-for-item"><i class="fa-solid fa-building" aria-hidden="true"></i>Corporate Events &amp; Launches</div>
+        <div class="perfect-for-item"><i class="fa-solid fa-cake-candles" aria-hidden="true"></i>Birthdays &amp; Milestones</div>
+        <div class="perfect-for-item"><i class="fa-solid fa-chalkboard-user" aria-hidden="true"></i>Seminars &amp; Workshops</div>
+        <div class="perfect-for-item"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>And Much More</div>
       </div>
     </div>
   </section>
@@ -5915,6 +5936,43 @@
       else { onScreen = true; start(); }
     }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', setupBespokeSlider); else setupBespokeSlider();
+
+    // Venue hero text: each line stays 15 seconds, then fades out as the next fades in.
+    // Pauses while hovered or focused, while the tab is hidden, and stays still for reduced-motion visitors.
+    function setupVenueHeroRotator() {
+      const root = document.getElementById('venue-hero-rotator');
+      if (!root || root.dataset.ready) return;
+      root.dataset.ready = '1';
+      const lines = [...root.children];
+      const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (lines.length < 2 || reduceMotion) return;
+      const HOLD_MS = 15000;
+      let index = 0, timer = null, paused = false, onScreen = false;
+      function show(i) {
+        index = i % lines.length;
+        lines.forEach((line, n) => {
+          line.classList.toggle('is-active', n === index);
+          if (n === index) line.removeAttribute('aria-hidden'); else line.setAttribute('aria-hidden', 'true');
+        });
+      }
+      function schedule() {
+        clearTimeout(timer);
+        if (!paused && onScreen && !document.hidden) timer = setTimeout(() => { show(index + 1); schedule(); }, HOLD_MS);
+      }
+      // Count the 15 seconds only while the text is actually on screen (not while on another page or scrolled away).
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(entries => { onScreen = entries[entries.length - 1].isIntersecting; schedule(); }).observe(root);
+      } else {
+        onScreen = true;
+      }
+      root.addEventListener('mouseenter', () => { paused = true; clearTimeout(timer); });
+      root.addEventListener('mouseleave', () => { paused = false; schedule(); });
+      root.addEventListener('focusin', () => { paused = true; clearTimeout(timer); });
+      root.addEventListener('focusout', () => { paused = false; schedule(); });
+      document.addEventListener('visibilitychange', schedule);
+      schedule();
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', setupVenueHeroRotator); else setupVenueHeroRotator();
 
     // Venue Concept design albums. Each tile with an album opens it with openVenueAlbum('<key>', index, button).
     // width is the image's pixel width; every image also needs a sharpened <name>@2x.jpg next to it.
